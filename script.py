@@ -1,14 +1,15 @@
 import csv
 class Samples:
-    def __init__(stockcode="NULL", pstockcode="NULL", sampletype="NULL", department="NULL", location="NULL"):
+    def __init__(self, stockcode="NULL", pstockcode="NULL", sampletype="NULL", department="NULL", location="NULL"):
         self.stockcode = stockcode
         self.pstockcode = pstockcode
         self.sampletype = sampletype
         self.department = department
         self.location = location
     
-    def __str__():
-        return "In department: " + self.department + " at " + self.location + ". The Parent: " + self.pstockcode + " and the child: " + self.stockcode
+    def returnsamples(self):
+        foo = "In department: " + self.department + " at " + self.location + ". The Parent: " + self.pstockcode + " and the child: " + self.stockcode + "\n"
+        return foo
 
 discprodarr = []
 file = open('discontinued_products.csv', newline='\r\n')
@@ -20,7 +21,8 @@ samplesarr = []
 file = open('samples.csv', newline='\r\n')
 reader = csv.reader(file, delimiter=',')
 for column in reader:
-    samplesarr.append(Samples(column[0], column[1], column[2], column[3], column[4]))
+    a = Samples(column[0], column[1], column[2], column[3], column[4])
+    samplesarr.append(a)
 
 discsamplesarr = []
 for x in discprodarr:
@@ -32,5 +34,5 @@ for x in discprodarr:
 
 with open("output.txt", 'w') as f:
     for x in discsamplesarr:
-        f.write(x + "\n")
+        f.write(x.returnsamples())
 
